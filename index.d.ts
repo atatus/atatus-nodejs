@@ -1,103 +1,62 @@
 // Type definitions for atatus-node package
 // Project: https://github.com/atatus/atatus-node
 
-export interface AgentOptions {
+declare module 'atatus-node' {
 
-    /** API Key of the project. Mandatory */
-    apiKey: string;
+    interface AgentOptions {
 
-    appVersion?: string;
+        /** API Key of the project. Mandatory */
+        apiKey: string;
 
-    releaseStage?: string;
+        appVersion?: string;
 
-    hostname?: string;
+        releaseStage?: string;
 
-    logLevel?: string;
+        hostname?: string;
 
-    filters?: string[];
+        logLevel?: string;
 
-    ignoreStatusCodes?: number[];
+        filters?: string[];
 
-    tags?: string[];
+        ignoreStatusCodes?: number[];
 
-    customData?: Object;
+        tags?: string[];
 
-    sendCode?: boolean;
+        customData?: Object;
 
-    projectRoot?: string;
+        sendCode?: boolean;
 
-    useSSL?: boolean;
-    proxy?: string;
-    notifyHost?: string;
-    notifyPath?: string;
-    notifyPort?: string;
+        projectRoot?: string;
 
-    beforeErrorSend?: (data: any) => any;
+        useSSL?: boolean;
+        proxy?: string;
+        notifyHost?: string;
+        notifyPath?: string;
+        notifyPort?: string;
 
-    groupingKey?: (data: any) => string;
-}
+        beforeErrorSend?: (data: any) => any;
 
-export function start(options: AgentOptions): any;
+        groupingKey?: (data: any) => string;
+    }
 
-export function stop(options?: any, callback?: Function): void;
+    interface Atatus {
 
-export function excludeURL(url: string): any;
+        start(options: AgentOptions): any;
 
-export function notifyError(ex: Error, customData?: Object): void;
+        stop(options?: any, callback?: Function): void;
 
-export function setTransactionName(name: string): any;
+        excludeURL(url: string): any;
 
-export function startTransaction(name: string, callback: Function): any;
+        notifyError(ex: Error, customData?: Object): void;
 
-export function endTransaction(): void;
+        setTransactionName(name: string): any;
 
-export function createLayer(name: string, callback: Function): any;
+        startTransaction(name: string, callback: Function): any;
 
+        endTransaction(): void;
 
-export namespace start {
-    const prototype: {
-    };
+        createLayer(name: string, callback: Function): any;
+    }
 
-}
-
-export namespace stop {
-    const prototype: {
-    };
-
-}
-
-export namespace excludeURL {
-    const prototype: {
-    };
-
-}
-
-export namespace notifyError {
-    const prototype: {
-    };
-
-}
-
-export namespace setTransactionName {
-    const prototype: {
-    };
-
-}
-
-export namespace startTransaction {
-    const prototype: {
-    };
-
-}
-
-export namespace endTransaction {
-    const prototype: {
-    };
-
-}
-
-export namespace createLayer {
-    const prototype: {
-    };
-
+    export = Atatus;
 }
