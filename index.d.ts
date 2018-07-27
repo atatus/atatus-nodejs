@@ -1,9 +1,28 @@
 // Type definitions for atatus-node package
 // Project: https://github.com/atatus/atatus-node
 
-declare module 'atatus-node' {
+declare namespace atatus {
 
-    interface AgentOptions {
+    interface Atatus {
+
+        start(options: ConfigurationOptions): Atatus;
+
+        stop(options?: any, callback?: Function): void;
+
+        excludeURL(url: string): void;
+
+        notifyError(error: string | Error, customData?: Object): void;
+
+        setTransactionName(name: string): void;
+
+        startTransaction(name: string, callback: Function): any;
+
+        endTransaction(): void;
+
+        createLayer(name: string, callback: Function): any;
+    }
+
+    interface ConfigurationOptions {
 
         /** API Key of the project. Mandatory */
         apiKey: string;
@@ -34,29 +53,12 @@ declare module 'atatus-node' {
         notifyPath?: string;
         notifyPort?: string;
 
-        beforeErrorSend?: (data: any) => any;
+        beforeErrorSend?(payload: any): any;
 
-        groupingKey?: (data: any) => string;
+        groupingKey?(payload: any): string;
     }
 
-    interface Atatus {
-
-        start(options: AgentOptions): any;
-
-        stop(options?: any, callback?: Function): void;
-
-        excludeURL(url: string): any;
-
-        notifyError(ex: Error, customData?: Object): void;
-
-        setTransactionName(name: string): any;
-
-        startTransaction(name: string, callback: Function): any;
-
-        endTransaction(): void;
-
-        createLayer(name: string, callback: Function): any;
-    }
-
-    export = Atatus;
 }
+
+declare const atatus: atatus.Atatus;
+export = atatus;
