@@ -1,5 +1,5 @@
-// Type definitions for atatus-node package
-// Project: https://github.com/atatus/atatus-node
+// Type definitions for atatus-nodejs package
+// Project: https://github.com/atatus/atatus-nodejs
 
 declare namespace atatus {
 
@@ -7,25 +7,24 @@ declare namespace atatus {
 
         start(options: ConfigurationOptions): Atatus;
 
-        stop(options?: any, callback?: Function): void;
-
         excludeURL(url: string): void;
 
         notifyError(error: string | Error, customData?: Object): void;
 
         setTransactionName(name: string): void;
 
-        startTransaction(name: string, callback: Function): any;
+        startTransaction(name: string): any;
 
         endTransaction(): void;
 
-        createLayer(name: string, callback: Function): any;
+        createSpan(name: string, type?: string, customData?: Object): any;
     }
 
     interface ConfigurationOptions {
 
-        /** API Key of the project. Mandatory */
-        apiKey: string;
+        /** License Key and App name of the project. Mandatory */
+        licenseKey: string;
+        appName: string;
 
         appVersion?: string;
 
@@ -35,27 +34,17 @@ declare namespace atatus {
 
         logLevel?: string;
 
-        filters?: string[];
-
         ignoreStatusCodes?: number[];
 
         tags?: string[];
 
         customData?: Object;
 
-        sendCode?: boolean;
-
-        projectRoot?: string;
-
         useSSL?: boolean;
         proxy?: string;
         notifyHost?: string;
         notifyPath?: string;
         notifyPort?: string;
-
-        beforeErrorSend?(payload: any): any;
-
-        groupingKey?(payload: any): string;
     }
 
 }
